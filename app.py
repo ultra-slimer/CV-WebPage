@@ -1,16 +1,12 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = '4xrc68tgv7y870vb0892'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:postgres@localhost'
+db = SQLAlchemy(app)
 
-
-@app.route('/')
-def hello_world():  # put application's code here
-    return 'Hello World!'
-
+from routes import *
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-@app.route('/heyoo')
-def testing():
-    return render_template("hello.html", name="ASDA")
